@@ -18,6 +18,7 @@ export default (props) => {
     <Fragment>
       <Header></Header>
       <Container fixed style={{marginTop:10}}>{props.children}</Container>
+     
     </Fragment>
   );
 };

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import {
   Grid,
@@ -30,6 +30,13 @@ import {
 const List = ({ contracts, ...props }) => {
   const [open, setOpen] = useState(false);
 
+  const [list, setList]= useState([])
+
+  useEffect(()=>{
+    const favorites= contracts?.list?.filter((l)=> l.favorite === true)
+    setList(favorites)
+  },[contracts])
+
   const deleteContract = (e) => {
     e.preventDefault();
     props.removeContract(open);
@@ -44,15 +51,18 @@ const List = ({ contracts, ...props }) => {
       props.addFavirateContract(data.id);
     }
   };
+
+  console.log(list,45555)
   return (
     <Template>
+
       <Grid spacing={5} container>
-        <Grid item xs={12} md={12}>
-          <h3>All Contract List</h3>
-        </Grid>
-        {contracts?.list?.length < 1 ? (
+      <Grid item xs={12} md={12}>
+        <h3>Favorite Contract List</h3>
+      </Grid>
+        {list?.length < 1 ? (
           <Grid item xs={6} md={3}>
-            <Alert severity="error">No Contract</Alert>
+            <Alert severity="error">No Favorite Contract</Alert>
           </Grid>
         ) : (
           <Fragment>
@@ -64,7 +74,7 @@ const List = ({ contracts, ...props }) => {
             />
             {/*** Remove Contract End */}
 
-            {contracts?.list?.map((contract, index) => (
+            {list?.map((contract, index) => (
               <Grid item xs={12} md={3} key={index}>
                 <Card variant="outlined">
                   <CardContent>

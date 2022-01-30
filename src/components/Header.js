@@ -11,9 +11,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { useHistory, NavLink } from "react-router-dom";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -36,16 +34,18 @@ const ResponsiveAppBar = () => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" className="header">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
-          >
-            LOGO
-          </Typography>
+          <NavLink to="/">
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+            >
+              LOGO
+            </Typography>
+          </NavLink>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -77,10 +77,19 @@ const ResponsiveAppBar = () => {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">List</Typography>
+                <NavLink to="/">
+                  <Typography textAlign="center">List</Typography>
+                </NavLink>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Add Contract</Typography>
+                <NavLink to="/favorites">
+                  <Typography textAlign="center">Favorites</Typography>
+                </NavLink>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <NavLink to="/add">
+                  <Typography textAlign="center">Add Contract</Typography>{" "}
+                </NavLink>
               </MenuItem>
             </Menu>
           </Box>
@@ -94,10 +103,19 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <MenuItem onClick={handleCloseNavMenu}>
-              <Typography textAlign="center">List</Typography>
+              <NavLink to="/">
+                <Typography textAlign="center">List</Typography>
+              </NavLink>
             </MenuItem>
             <MenuItem onClick={handleCloseNavMenu}>
-              <Typography textAlign="center">Add Contract</Typography>
+              <NavLink to="/favorites">
+                <Typography textAlign="center">Favorites</Typography>
+              </NavLink>
+            </MenuItem>
+            <MenuItem onClick={handleCloseNavMenu}>
+              <NavLink to="/add">
+                <Typography textAlign="center">Add Contract</Typography>
+              </NavLink>
             </MenuItem>
           </Box>
         </Toolbar>

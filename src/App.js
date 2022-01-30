@@ -5,7 +5,6 @@ import Routes from "./routes";
 
 
 function App() {
-  console.log(98998)
   return <Routes></Routes>;
 }
 
